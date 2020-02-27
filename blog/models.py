@@ -5,10 +5,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
-    
+from django.utils.html import strip_tags
+import markdown
 
- 
- 
 class Category(models.Model):  
     name = models.CharField(max_length=100)
 
@@ -17,9 +16,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name = '分类'
-        verbose_name_plural = verbose_name
- 
- 
+        verbose_name_plural = verbose_name 
 class Tag(models.Model):
     name = models.CharField(max_length=100)
  
@@ -42,6 +39,11 @@ class Post(models.Model):
 
     def save(self,*args, **kwargs):
         self.modified_time = timezone.now()
+        md = markdown.Markdown(extensions=[
+            'markdown.extensions.extra',
+            'markdown.extensions.codehilite',
+        ])
+        self.excerpt = strip_tags(md.convert(self.body))[:54]
         super().save(*args,**kwargs)
 
     class Meta:
