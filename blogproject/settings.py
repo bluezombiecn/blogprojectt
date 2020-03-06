@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'comments.apps.CommentsConfig',
     'pure_pagination',
+    'haystack',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,15 @@ PAGINATION_SETTINGS = {
     'MARGIN_PAGES_DISPLAYED': 2,
     'SHOW_FIRST_PAGE_WHEN_INVALID': True,
 }
+
+# 搜索
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.elasticsearch2_backend.Elasticsearch2SearchEngine',
+        'URL': '',
+        'INDEX_NAME': 'hellodjango_blog_tutorial',
+    },
+}
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+HAYSTACK_CONNECTIONS['default']['URL'] = 'http://elasticsearch_local:9200/'
