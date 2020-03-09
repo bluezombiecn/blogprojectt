@@ -2,6 +2,7 @@ from django.urls import path
 from blog.feeds import  AllPostsRssFeed
 from . import views
 
+
 app_name = 'blog'
 urlpatterns = [
     path('',views.IndexView.as_view(),name='index'),
@@ -11,5 +12,5 @@ urlpatterns = [
     path('tags/<int:pk>/', views.TagView.as_view(), name='tag'),
     path('all/rss/', AllPostsRssFeed(), name='rss'),
  #   path('search/',views.search,name='search'),
-    path('search/',include('haystack.urls')),
+ 
 ]

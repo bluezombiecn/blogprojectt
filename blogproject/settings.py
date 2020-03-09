@@ -132,11 +132,11 @@ PAGINATION_SETTINGS = {
 # 搜索
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.elasticsearch2_backend.Elasticsearch2SearchEngine',
+        'ENGINE': 'haystack.backends.elasticsearch2_backend.Elasticsearch2SearchEngine',
         'URL': '',
         'INDEX_NAME': 'hellodjango_blog_tutorial',
     },
 }
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
-HAYSTACK_CONNECTIONS['default']['URL'] = 'http://elasticsearch_local:9200/'
+HAYSTACK_CONNECTIONS['default']['URL'] = 'http://127.0.0.1:9200/'
